@@ -219,21 +219,23 @@ export function Work() {
         <TabsContent value="formations" className={"relative"}>
             <Formations></Formations>
         </TabsContent>
-        <svg className="absolute opacity-50"
-             xmlns="http://www.w3.org/2000/svg" version="1.1" xmlnsXlink="http://www.w3.org/1999/xlink"
-             viewBox="0 0 800 450" opacity="0.74">
-            <defs>
-                <filter id="bbblurry-filter" x="-100%" y="-100%" width="400%" height="400%"
-                        filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse"
-                        colorInterpolationFilters="sRGB">
-                    <feGaussianBlur stdDeviation="56" x="0%" y="0%" width="100%" height="100%"
-                                    in="SourceGraphic" edgeMode="none" result="blur"></feGaussianBlur>
-                </filter>
-            </defs>
-            <g filter="url(#bbblurry-filter)">
-                <ellipse rx="111.5" ry="113" cx="62.422933405095904" cy="377.84229070490056"
-                         fill="hsla(44, 75%, 57%, 1.00)"></ellipse>
-            </g>
-        </svg>
     </Tabs>;
 }
+
+
+// <svg className="absolute opacity-50"
+//      xmlns="http://www.w3.org/2000/svg" version="1.1" xmlnsXlink="http://www.w3.org/1999/xlink"
+//      viewBox="0 0 800 450" opacity="0.74">
+//     <defs>
+//         <filter id="bbblurry-filter" x="-100%" y="-100%" width="400%" height="400%"
+//                 filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse"
+//                 colorInterpolationFilters="sRGB">
+//             <feGaussianBlur stdDeviation="56" x="0%" y="0%" width="100%" height="100%"
+//                             in="SourceGraphic" edgeMode="none" result="blur"></feGaussianBlur>
+//         </filter>
+//     </defs>
+//     <g filter="url(#bbblurry-filter)">
+//         <ellipse rx="111.5" ry="113" cx="62.422933405095904" cy="377.84229070490056"
+//                  fill="hsla(44, 75%, 57%, 1.00)"></ellipse>
+//     </g>
+// </svg>
