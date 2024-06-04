@@ -1,209 +1,107 @@
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs";
 import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
-import {Label} from "@radix-ui/react-dropdown-menu";
 import {Button} from "@/components/ui/button";
-import {Input} from "@/components/ui/input";
 import Image from "next/image";
-import TiktoolsImage from "@/public/tiktools.png";
-import KopeurImage from "@/public/kopeur.jpeg";
-import TradingIcon from "@/public/traiding-icon.png";
-import ResellSpotterImage from "@/public/resell_spotter.png";
-import WebenlaImage from "@/public/webenla-academy-logo.png";
-import I2NImage from "@/public/i2n.png";
-import PolytechImage from "@/public/polytech.webp";
-import SteCroixImage from "@/public/stecroix.jpeg";
 import {Dialog, DialogContent, DialogTrigger} from "@/components/ui/dialog";
+import {KopeurProject, ProjectsConfig, TiktoolsProject, TradingBotProject} from "@/config/projects";
+import React from "react";
+import {Info} from "lucide-react";
+import {LogoSticker} from "@/components/logo-sticker";
+import {FormationConfig, PolytechFormation, SteCroixFormation} from "@/config/formations";
+import {MissionsConfig} from "@/config/missions";
 
-
-export function Project({img, name, description, content, date, more}) {
-    return <Card>
+export function Project({img, name, link, description, introduction, date, more}) {
+    return <Card className={'w-full relative overflow-hidden '}>
         <CardHeader>
-            <CardTitle className={"gap-2 flex flex-col"}>
-                <div className="flex flex-raw gap-3 justify-start items-center">
-                    <Image src={img} alt={"tiktools logo"} className="w-[30px]"/>
-                    <span> {name} </span>
+            <CardTitle className={"flex flex-row gap-3 justify-between items-center z-10"}>
+                <div className={'flex flex-row justify-center items-center gap-3'}>
+                    <Image src={img} alt={name} className="w-[50px]"/>
+                    <a href={link} target={link !== undefined ? '_blank' : ''}
+                       className={'text-gray-300 cursor-pointer'}> {name} </a>
                 </div>
+                <Dialog>
+                    <DialogTrigger asChild>
+                        <Button className={"z-20"} disabled={more === undefined}><Info/></Button>
+                    </DialogTrigger>
+                    <DialogContent className={' w-[90%] rounded-md '}>
+                                <CardTitle className={"flex flex-row gap-3 justify-between items-center"}>
+                                    <div className={'flex flex-row justify-center items-center gap-3'}>
+                                        <Image src={img} alt={name} className="w-[50px]"/>
+                                        <a href={link} target={'_blank'}
+                                           className={'text-primary cursor-pointer'}> {name} </a>
+                                    </div>
+                                </CardTitle>
+                                <CardContent className={'flex flex-col gap-4'}>
+                                    <div>
+                                        <h1 className={'text-2xl font-bold'}>Description</h1>
+                                        <div className={"p-2 text-justify"}>
+                                            {more.description}
+                                        </div>
+                                    </div>
+                                    {more?.stacks !== undefined &&
+                                        <div>
+                                            <h1 className={'text-2xl font-bold'}>Stack Used</h1>
+                                            <div className={"p-2 flex flex-wrap gap-2"}>
+                                                {more.stacks.map(([name, img], index) => {
+                                                    return <LogoSticker key={index} img={img} alt={name} width={30}
+                                                                        height={30}></LogoSticker>;
+                                                })}
+                                            </div>
+                                        </div>
+                                    }
+                                </CardContent>
+
+                    </DialogContent>
+                </Dialog>
+
             </CardTitle>
             <CardDescription>
                 {description}
             </CardDescription>
         </CardHeader>
-        <CardContent className={'flex justify-center text-justify'}>
-            {content}
+        <CardContent className={'flex justify-center text-justify overflow-hidden'}>
+            <svg className="absolute max-md:top-[-13px] max-md:left-[-69px] md:top-[-387px] md:left-[-175px] opacity-50" xmlns="http://www.w3.org/2000/svg" version="1.1"
+                 xmlnsXlink="http://www.w3.org/1999/xlink"
+                 viewBox="0 0 800 800">
+                <defs>
+                    <filter id="bbblurry-filter" x="-100%" y="-100%" width="400%" height="400%"
+                            filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse"
+                            colorInterpolationFilters="sRGB">
+                        <feGaussianBlur stdDeviation="62" x="0%" y="0%" width="100%" height="100%"
+                                        in="SourceGraphic" edgeMode="none"
+                                        result="blur"></feGaussianBlur>
+                    </filter>
+                </defs>
+                <g filter="url(#bbblurry-filter)">
+                    <ellipse rx="160.5" ry="150" cx="151.5601014941151" cy="576.8503213453043"
+                             fill="hsla(48, 77%, 56%, 1.00)"></ellipse>
+                    <ellipse rx="160.5" ry="150" cx="315.557253213453" cy="555.9973708547222"
+                             fill="hsla(156, 70%, 65%, 1.00)"></ellipse>
+                    <ellipse rx="160.5" ry="150" cx="254.94213579587284" cy="708.8825597313687"
+                             fill="hsla(56, 72%, 63%, 1.00)"></ellipse>
+                </g>
+            </svg>
+            {introduction}
         </CardContent>
-        <CardFooter className={"flex justify-between italic text-gray-400 text-sm"}>
-            <Dialog>
-                <DialogTrigger disabled={more === undefined}>
-                    See More
-                </DialogTrigger>
-                <DialogContent>
-                    {more}
-                </DialogContent>
-            </Dialog>
-            {date}
+        <CardFooter className={"flex justify-end italic text-gray-400 text-sm"}>
+
+            <span className={"text-[12px]"}>{date}</span>
         </CardFooter>
     </Card>;
 }
 
-export function TiktoolsProject() {
-    const tiktoolsContent = `As one of the co-founders of Tiktools, a SaaS platform that accelerates and automates content creation for social media, I was responsible for designing the project's architecture and implementing a microservices system to horizontally scale video generation. I developed a library to add transition effects to videos and worked on various features of the project. Additionally, I created an onboarding system for users with personalized tracking, manipulated videos using FFmpeg, developed a Discord bot, and utilized both local and API-based AI (Image / Audio / Text).
 
-`
-
-    return <Project
-        content={tiktoolsContent}
-        description={"Tool that creates content for social media for you"}
-        img={TiktoolsImage}
-        name={"Tiktools"}
-        date={"From December 2023 to June 2024"}
-    />;
-}
-
-export function KopeurProject() {
-    const kopeurContent = "I am one of the co-founders of Kopeur, a now-defunct SaaS company. The business focused on retrieving new items on Vinted more quickly, before they appeared in the feed. My role in the company included designing and implementing the architecture, setting up environment pipelines for server deployment, implementing a reverse proxy and DNS routing via a DNS challenge, optimizing the aggregation and search for new Vinted items, developing a high-performance algorithm to retrieve Vinted items with a delay of less than 300 ms, implementing a WebSocket system to deliver items to users, and setting up a custom end-to-end testing system.";
-    return <Project
-        content={kopeurContent}
-        description={"Application to buy Vinted items first"}
-        img={KopeurImage}
-        name={"Kopeur"}
-        more={"adaskl"}
-        date={"From October 2022 to May 2023"}
-    />;
-}
-
-export function TradingBot() {
-    const tradingContent = "I developed a personal trading bot project. This bot uses an algorithm to buy and sell cryptocurrency based on the targeted crypto's price movements.";
-    return <Project
-        content={tradingContent}
-        description={"Cryptocurrency Trading Bot"}
-        img={TradingIcon}
-        name={"Trading Bot"}
-        date={"From February 2022 to November 2022"}
-    />;
-}
-
-export function Projects() {
-
-    const projects = [
-        TiktoolsProject,
-        KopeurProject,
-        TradingBot
-    ];
-
-    return <div>
-        <CardContent className="gap-5 flex flex-wrap w-full justify-center items-center">
-            {...projects.map((Project, index) => {
-                return <Project key={index}></Project>
-            })}
-
-        </CardContent>
-        <CardFooter className={"flex w-full justify-end"}>
-            <span className="text-sm italic font-bold opacity-45">Updated 1 June 2024</span>
-        </CardFooter>
+function WorkSection({work}) {
+    return <div className={"gap-5 flex flex-wrap w-full justify-center items-center"}>
+        {...work.map((workInformation, index) => {
+            return <Project key={index}  {...workInformation} ></Project>;
+        })}
     </div>;
-}
-
-export function ResellSpotter() {
-    const spotterContent = "I'm the Co-Founder of Kopeur. We are a team of 3 people.\n" +
-        "We are working on a tool to help you grow your Tiktok account.\n" +
-        "We are using the latest technologies to provide you the best experience.\n" +
-        "We are using NextJs, NodeJs, Rust, and Python. We are also using Docker to deploy our application.";
-    return <Project
-        content={spotterContent}
-        description={"Kopeur is a tool to help you grow your Tiktok account."}
-        img={ResellSpotterImage}
-        name={"Resell Spotter"}
-    />;
-}
-
-
-export function PolytechNice() {
-    const spotterContent = "I'm the Co-Founder of Kopeur. We are a team of 3 people.\n" +
-        "We are working on a tool to help you grow your Tiktok account.\n" +
-        "We are using the latest technologies to provide you the best experience.\n" +
-        "We are using NextJs, NodeJs, Rust, and Python. We are also using Docker to deploy our application.";
-    return <Project
-        content={spotterContent}
-        description={"Kopeur is a tool to help you grow your Tiktok account."}
-        img={PolytechImage}
-        name={"Polytech Nice Sophia"}
-    />;
-}
-
-export function SteCroix() {
-    const spotterContent = "I'm the Co-Founder of Kopeur. We are a team of 3 people.\n" +
-        "We are working on a tool to help you grow your Tiktok account.\n" +
-        "We are using the latest technologies to provide you the best experience.\n" +
-        "We are using NextJs, NodeJs, Rust, and Python. We are also using Docker to deploy our application.";
-    return <Project
-        content={spotterContent}
-        description={"Kopeur is a tool to help you grow your Tiktok account."}
-        img={SteCroixImage}
-        name={"Saint Croix Saint Euverte"}
-    />;
-}
-
-export function Formations() {
-    const formations = [
-        PolytechNice,
-        SteCroix
-    ];
-
-    return <div>
-        <CardContent className=" gap-5 flex flex-wrap w-full justify-center items-center">
-            {...formations}
-            {...formations.map((Formation, index) => {
-                return <Formation key={index}></Formation>
-            })}
-
-        </CardContent>
-        <CardFooter className={"flex w-full justify-end"}>
-            <span className="text-sm italic font-bold opacity-45">Updated 1 June 2024</span>
-        </CardFooter>
-    </div>;
-}
-
-export function Webenla() {
-    const webenlaContent = "I'm the Co-Founder of Kopeur. We are a team of 3 people.\n" + "";
-    return <Project
-        content={webenlaContent}
-        description={"Kopeur is a tool to help you grow your Tiktok account."}
-        img={WebenlaImage}
-        name={"Webenla"}/>;
-}
-
-
-export function I2N() {
-    const i2nContent = "I'm the Co-Founder of Kopeur. We are a team of 3 people.\n" + "";
-    return <Project
-        content={i2nContent}
-        description={"Kopeur is a tool to help you grow your Tiktok account."}
-        img={I2NImage}
-        name={"I2N"}/>;
-}
-
-export function Missions() {
-    const missions = [
-        ResellSpotter,
-        Webenla,
-        I2N
-    ];
-
-    return <div>
-        <CardContent className=" gap-5 flex flex-wrap w-full justify-center items-center">
-            {...missions}
-            {...missions.map((Mission, index) => {
-                return <Mission key={index}></Mission>
-            })}
-
-        </CardContent>
-        <CardFooter className={"flex w-full justify-end"}>
-            <span className="text-sm italic font-bold opacity-45">Updated 1 June 2024</span>
-        </CardFooter>
-    </div>
 }
 
 export function Work() {
+
+
     return <Tabs defaultValue="projects" className={"w-[95%] relative"} orientation={'horizontal'}>
         <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="projects">Projects</TabsTrigger>
@@ -211,31 +109,16 @@ export function Work() {
             <TabsTrigger value="formations">Formation</TabsTrigger>
         </TabsList>
         <TabsContent value="projects" className={"relative"}>
-            <Projects></Projects>
+            <WorkSection work={ProjectsConfig}></WorkSection>
         </TabsContent>
         <TabsContent value="missions" className={"relative"}>
-            <Missions></Missions>
+            <WorkSection work={MissionsConfig}></WorkSection>
+
         </TabsContent>
         <TabsContent value="formations" className={"relative"}>
-            <Formations></Formations>
+            <WorkSection work={FormationConfig}/>
         </TabsContent>
     </Tabs>;
 }
 
 
-// <svg className="absolute opacity-50"
-//      xmlns="http://www.w3.org/2000/svg" version="1.1" xmlnsXlink="http://www.w3.org/1999/xlink"
-//      viewBox="0 0 800 450" opacity="0.74">
-//     <defs>
-//         <filter id="bbblurry-filter" x="-100%" y="-100%" width="400%" height="400%"
-//                 filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse"
-//                 colorInterpolationFilters="sRGB">
-//             <feGaussianBlur stdDeviation="56" x="0%" y="0%" width="100%" height="100%"
-//                             in="SourceGraphic" edgeMode="none" result="blur"></feGaussianBlur>
-//         </filter>
-//     </defs>
-//     <g filter="url(#bbblurry-filter)">
-//         <ellipse rx="111.5" ry="113" cx="62.422933405095904" cy="377.84229070490056"
-//                  fill="hsla(44, 75%, 57%, 1.00)"></ellipse>
-//     </g>
-// </svg>

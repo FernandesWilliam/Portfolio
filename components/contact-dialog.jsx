@@ -2,12 +2,12 @@ import {Dialog, DialogContent, DialogTitle, DialogTrigger} from "@/components/ui
 import {Button} from "@/components/ui/button";
 import {useState} from "react";
 import {Separator} from "@/components/ui/separator";
-import {LinkedInLink, MailAddress, PhoneNumber} from "@/content";
+import {LinkedInLink, MailAddress, PhoneNumber} from "@/config/content";
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 
 
 export function ContactDialog({text, buttonClassName, variant}) {
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(true);
 
     function openDialog() {
         setOpen(true);

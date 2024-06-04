@@ -8,7 +8,8 @@ import {Button} from "@/components/ui/button";
 import Image from "next/image";
 import ShineBorder from "@/components/magicui/shine-border";
 import {GlossPolygon} from "@/components/gloss-polygon";
-import {AboutMe, ProfileImage} from "@/content";
+import {AboutMe, ProfileImage} from "@/config/content";
+import {ContactDialog} from "@/components/contact-dialog";
 
 export default function Home() {
     return (
@@ -36,8 +37,8 @@ export default function Home() {
                 </div>
                 <Skill></Skill>
                 <Work></Work>
+                <ContactDialog text={'Get in Touch'}/>
 
-                <Button>Get In Touch</Button>
             </div>
 
 

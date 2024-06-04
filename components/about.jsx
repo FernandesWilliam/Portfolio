@@ -2,14 +2,9 @@ import {TypeAnimation} from "react-type-animation";
 import {Button} from "@/components/ui/button";
 import Image from "next/image";
 
-import GithubImage from "../public/icons/github.png";
-import LinkedinImage from "../public/icons/linkedin.png";
-import MailImage from "../public/icons/arroba.png";
+
 import {BentoCard, BentoGrid} from "@/components/magicui/bento-grid";
-import {Skill} from "@/components/skill";
-import {CalendarIcon, FileTextIcon} from "lucide-react";
-import TiktoolsImage from "@/public/tiktools.png";
-import DD from "@/public/download.svg";
+
 import Marquee from "@/components/magicui/marquee";
 import {cn} from "@/lib/utils";
 import AvatarCircles from "@/components/magicui/avatar-circles";
@@ -17,8 +12,11 @@ import {GithubIconSvg} from "@/components/svg/github.icon.svg";
 import {LinkedinIconSvg} from "@/components/svg/linkedin.icon.svg";
 import {MailIconSvg} from "@/components/svg/mail.icon.svg";
 import WordRotate from "@/components/magicui/word-rotate";
-import {GithubLink, LinkedInLink, LookingFor, SequenceDescription} from "@/content";
+import {GithubLink, LinkedInLink, LookingFor, SequenceDescription} from "@/config/content";
 import {ContactDialog} from "@/components/contact-dialog";
+import LinkedinImage from "@/public/network/linkedin.png";
+import MailImage from "@/public/network/mail.png";
+
 
 const files = [
     {
@@ -85,42 +83,53 @@ export function ProjectBento({className}) {
 export function About() {
 
     return <div
-        className="relative w-full max-md:h-[220px] md:h-[250px]
-        grid md:grid-cols-[70%_30%] max-md:grid-rows-2 md:p-[15px] max-md:px-[40px] max-md:pt-[30px]">
+        className="relative w-full max-md:h-[230px] md:h-[250px]
+        grid md:grid-cols-[70%_30%] max-md:grid-rows-2 md:p-[15px] max-md:px-[15px] max-md:pt-[30px]">
 
 
-        <div className="flex flex-col">
-            <h1 className="text-[50px] font-bold">Hey, <span className="text-secondary">You</span></h1>
-            <div className="">
-                <span className="md:text-[40px] max-md:text-[30px]"> I'm a </span>
-                <TypeAnimation sequence={SequenceDescription} repeat={Infinity}
-                               className="md:text-[40px] max-md:text-[30px] text-primary font-bold" deletionSpeed={1}>
-                </TypeAnimation>
-            </div>
-            <div className="text-[20px] capitalize font-semibold flex flex-row gap-3 items-center h-[80px]">
-                <span >Looking For :</span>
-            <WordRotate
-                className="text-[18px] text-black dark:text-green-200 p-0 h-full"
-                duration={1500}
-                words={LookingFor}
-            />
-            </div>
-            <div className="flex gap-4 flex-row w-full items-center">
+        <div className="flex flex-col w-full">
+            <h1 className="text-[50px] font-bold">Hey, </h1>
+            <h1 className="md:text-[40px] max-md:text-[25px] font-bold">I'm W<span className="text-secondary">ill</span></h1>
+                <div>
+                    <span className="md:text-[40px] max-md:text-[25px] font-bold"> I'm a </span>
+                    <TypeAnimation sequence={SequenceDescription} repeat={Infinity}
+                                   className="md:text-[40px] max-md:text-[25px] text-primary font-bold"
+                                   deletionSpeed={1}>
+                    </TypeAnimation>
+                </div>
+                <div className="text-[20px] capitalize font-semibold flex flex-row gap-3 items-center h-[80px]">
+                    <span className="max-md:text-[17px] md:text-[20px]">Need to </span>
+                    <WordRotate
+                        className="max-md:text-[17px] md:text-[20px] text-black dark:text-green-200 p-0 h-full"
+                        duration={1500}
+                        words={LookingFor}
+                    />
+                    <span className="max-md:text-[17px] md:text-[22px]">Your app ? </span>
+                </div>
+            <div className="flex gap-2 flex-row w-full items-center">
                 <ContactDialog text={'Contact Me'}
                                buttonClassName={"bg-accent"}/>
-                <a href={GithubLink} target={'_blank'}>
+                <a href={GithubLink} target={'_blank'} className={""}>
                     <GithubIconSvg className="w-[36px] h-[36] cursor-pointer" svgColor={"#ffffff"}></GithubIconSvg>
                 </a>
                 <a href={LinkedInLink} target={'_blank'}>
-                    <LinkedinIconSvg className="w-[36px] h-[36px] cursor-pointer"
-                                     svgColor={"#ffffff"}></LinkedinIconSvg>
+                    <Image src={LinkedinImage} alt={"Linkedin"}
+                           className="w-[36px] h-[36px] cursor-pointer rounded-sm"></Image>
+                    {/*<LinkedinIconSvg className="w-[36px] h-[36px] cursor-pointer"*/}
+                    {/*                 svgColor={"#ffffff"}></LinkedinIconSvg>*/}
                 </a>
-                    <MailIconSvg className="w-[36px] h-[36px] cursor-pointer [filter:invert(100%)]"></MailIconSvg>
+                <a href={"sdas"} className={""} target={'_blank'}>
+                    <Image src={MailImage} alt={"Mail"}
+                           className="w-[36px] h-[36px] cursor-pointer bg-white rounded-sm p-1"></Image>
+                    {/*<LinkedinIconSvg className="w-[36px] h-[36px] cursor-pointer"*/}
+                    {/*                 svgColor={"#ffffff"}></LinkedinIconSvg>*/}
+                </a>
+
 
             </div>
         </div>
         <div className={"max-md:hidden"}>
-        <ProjectBento className={"h-[220px]"}></ProjectBento>
+            <ProjectBento className={"h-[220px]"}></ProjectBento>
         </div>
 
     </div>;

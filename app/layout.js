@@ -17,8 +17,12 @@ export default function RootLayout({children}) {
 
         <body className={inter.className}>
         {children}
-        <footer className="w-full h-[70px] flex justify-center items-center">
-            Made with ❤️ by&nbsp; <a href="https://github.com/FernandesWilliam"  className="text-primary" target="_blank">Will</a>
+        <footer className="w-full h-[70px] flex justify-center items-center flex-col">
+            <span>
+            Made with ❤️ by&nbsp;<a href="https://github.com/FernandesWilliam" className="text-primary"
+                                    target="_blank">Will</a>
+                </span>
+            <span className={'text-[10px] text-gray-300'}>Updated 1 June of 2024</span>
         </footer>
         </body>
 

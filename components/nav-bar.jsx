@@ -16,15 +16,15 @@ import {ContactDialog} from "@/components/contact-dialog";
 export function NavBar() {
     return <nav className="flex w-full h-[80px] justify-between items-center">
         <h1 className="text-[40px] font-bold flex flex-row">
-            <p>I'm W</p><p className="text-secondary">ill</p>
+            <p>W</p><p className="text-secondary">ill</p>
         </h1>
         <div>
-            <div className={"relative"}>
+            <div className={"relative overflow-hidden"}>
                 <ContactDialog text={'Get in Touch'}
                                variant={'outline'}
-                               buttonClassName={"min-w-[80px]  md:min-w-[140px]  min-h-[46px]"}/>
+                               buttonClassName={"min-w-[80px]  md:min-w-[140px]  min-h-[46px] z-30"}/>
                 <BorderBeam size={150} duration={12} delay={9}
-                            className={"min-w-[80px]   md:min-w-[140px] hover:cursor-pointer min-h-[46px] rounded-md border"}>
+                            className={"min-w-[80px]  md:min-w-[140px] hover:cursor-pointer min-h-[46px] rounded-md border"}>
                 </BorderBeam>
             </div>
         </div>
