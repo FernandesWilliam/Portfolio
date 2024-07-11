@@ -1,0 +1,130 @@
+name: 🚀 Build and Deploy
+
+on:
+  workflow_call:
+    inputs:
+      stack_name:
+        required: true
+        type: string
+      stack_file:
+        required: true
+        type: string
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        service:
+          - image_name: ui
+            target: prod
+
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.sha }}
+
+      - name: 🔧 Add SHORT_SHA env property with commit short sha
+        run: |
+          echo "SHORT_SHA=$(echo ${GITHUB_SHA} | cut -c1-8)" >> $GITHUB_ENV
+
+      - name: 🔢 Calculate source files hash
+        id: source-files-hash
+        run: |
+          HASH=$(find . -type f | sort | xargs md5sum | md5sum | cut -d' ' -f1)
+          echo "HASH=$HASH\n" >> $GITHUB_OUTPUT
+
+      - name: 🔍 Does image already exist on server ?
+        uses: appleboy/ssh-action@v1.0.3
+        id: check-image-exists
+        continue-on-error: true
+        with:
+          host: ${{ secrets.MANAGER_NODE_HOST }}
+          username: ${{ secrets.MANAGER_NODE_USER }}
+          key: ${{ secrets.MANAGER_NODE_KEY }}
+          script: |
+            docker images ${{ matrix.service.image_name }} --format "{{.Repository}}:{{.Tag}}" |grep ${{steps.source-files-hash.outputs.HASH}} > /dev/null
+            exit $?
+
+      - name: 🏷️ Tag existing image
+        if: steps.check-image-exists.outcome == 'success'
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.MANAGER_NODE_HOST }}
+          username: ${{ secrets.MANAGER_NODE_USER }}
+          key: ${{ secrets.MANAGER_NODE_KEY }}
+          script: |
+            docker tag ${{ matrix.service.image_name }}:${{steps.source-files-hash.outputs.hash}} ${{ matrix.service.image_name }}:${{ env.SHORT_SHA }}
+
+      - name: 🛠️ Build image
+        if: steps.check-image-exists.outcome == 'failure'
+        run: |
+          docker build \
+            --target ${{ matrix.service.target }} \
+            -t ${{ matrix.service.image_name }}:${{ env.SHORT_SHA }} \
+            -t ${{ matrix.service.image_name }}:${{steps.source-files-hash.outputs.hash}} \
+            -f ./${{ matrix.service.dir }}/dockerfile .
+          docker save -o ${{ matrix.service.image_name }}.tar ${{ matrix.service.image_name }}
+          chmod 664 ${{ matrix.service.image_name }}.tar
+
+      - name: 📤 Send image to server
+        if: steps.check-image-exists.outcome == 'failure'
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.MANAGER_NODE_HOST }}
+          username: ${{ secrets.MANAGER_NODE_USER }}
+          key: ${{ secrets.MANAGER_NODE_KEY }}
+          source: ${{ matrix.service.image_name }}.tar
+          target: /tmp/
+
+      - name: 📦 Load image on server
+        if: steps.check-image-exists.outcome == 'failure'
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.MANAGER_NODE_HOST }}
+          username: ${{ secrets.MANAGER_NODE_USER }}
+          key: ${{ secrets.MANAGER_NODE_KEY }}
+          script: |
+            docker load -i /tmp/${{matrix.service.image_name}}.tar
+            rm /tmp/${{matrix.service.image_name}}.tar
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.sha }}
+
+      - name: 🔧 Add SHORT_SHA env property with commit short sha
+        run: |
+          echo "SHORT_SHA=$(echo ${GITHUB_SHA} | cut -c1-8)" >> $GITHUB_ENV
+
+      - name: 📝Format stack file
+        run : |
+          sed -i 's/{{short_sha}}/${{ env.SHORT_SHA }}/g' ${{ inputs.stack_file }}
+          mv ./${{ inputs.stack_file }} ${{ inputs.stack_name }}.yml
+
+      - name: 📨 Send stack file to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.MANAGER_NODE_HOST }}
+          username: ${{ secrets.MANAGER_NODE_USER }}
+          key: ${{ secrets.MANAGER_NODE_KEY }}
+          source: ./${{ inputs.stack_name }}.yml
+          target: /home/${{ secrets.MANAGER_NODE_USER }}/stacks/
+          overwrite: true
+
+      - name: 🚀 Deploy stack
+        uses: appleboy/ssh-action@v1.0.3
+        env:
+          DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
+        with:
+          host: ${{ secrets.MANAGER_NODE_HOST }}
+          username: ${{ secrets.MANAGER_NODE_USER }}
+          key: ${{ secrets.MANAGER_NODE_KEY }}
+          envs: DOPPLER_TOKEN
+          script: |
+            doppler run  -p boilerplate -c prd -- docker stack deploy -c /home/${{ secrets.MANAGER_NODE_USER }}/stacks/${{ inputs.stack_name }}.yml ${{ inputs.stack_name }}

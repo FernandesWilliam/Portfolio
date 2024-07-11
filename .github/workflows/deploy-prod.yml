@@ -1,0 +1,14 @@
+name: 🚀 Deploy production
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  deploy:
+    uses: ./.github/workflows/_build-and-deploy.yml
+    with:
+      stack_file: prod-stack.yml
+      stack_name: willz-portfolio
+    secrets: inherit
