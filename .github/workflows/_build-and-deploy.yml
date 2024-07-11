@@ -119,12 +119,9 @@ jobs:
 
       - name: 🚀 Deploy stack
         uses: appleboy/ssh-action@v1.0.3
-        env:
-          DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
         with:
           host: ${{ secrets.MANAGER_NODE_HOST }}
           username: ${{ secrets.MANAGER_NODE_USER }}
           key: ${{ secrets.MANAGER_NODE_KEY }}
-          envs: DOPPLER_TOKEN
           script: |
-            doppler run  -p boilerplate -c prd -- docker stack deploy -c /home/${{ secrets.MANAGER_NODE_USER }}/stacks/${{ inputs.stack_name }}.yml ${{ inputs.stack_name }}
+             docker stack deploy -c /home/${{ secrets.MANAGER_NODE_USER }}/stacks/${{ inputs.stack_name }}.yml ${{ inputs.stack_name }}
