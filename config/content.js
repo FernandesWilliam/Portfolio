@@ -1,4 +1,4 @@
-import ProfileImage from "@/public/profil.png";
+import ProfileImage from "@/public/profile.png";
 import JavaImage from "@/public/icons/stacks/java.png";
 import NodeJsImage from "@/public/icons/stacks/node-js.png";
 import NextJsImage from "@/public/icons/stacks/nextjs.png";

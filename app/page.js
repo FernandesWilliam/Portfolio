@@ -3,7 +3,6 @@ import {NavBar} from "@/components/nav-bar";
 import {About} from "@/components/about";
 import {Skill} from "@/components/skill";
 import {Work} from "@/components/work";
-import {Button} from "@/components/ui/button";
 
 import Image from "next/image";
 import ShineBorder from "@/components/magicui/shine-border";
@@ -30,7 +29,7 @@ export default function Home() {
                         <ShineBorder
                             className=" h-fit w-[130px]  rounded-md p-[2px] shadow-[5px_5px_rgba(0,_98,_90,_0.4),_10px_10px_rgba(0,_98,_90,_0.3),_15px_15px_rgba(0,_98,_90,_0.2),_20px_20px_rgba(0,_98,_90,_0.1),_25px_25px_rgba(0,_98,_90,_0.05)]"
                             color={["#4ecb4c", "#ffae2c", "#f9ff0a"]}>
-                            <Image className=" rounded-md" src={ProfileImage}/>
+                            <Image className=" rounded-md" src={ProfileImage} alt={"Image de Profile"}/>
                         </ShineBorder>
 
                     </div>

@@ -11,11 +11,9 @@ export function ContactDialog({text, buttonClassName, variant}) {
 
     function openDialog() {
         setOpen(true);
-        console.log("adssa");
     }
 
     function closeDialog() {
-        console.log("adssa");
     }
 
     return <Dialog open={false} onOpenChange={closeDialog}>
