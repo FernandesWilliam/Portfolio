@@ -12,7 +12,7 @@ export function LogoSticker({
             <TooltipTrigger asChild>
                 <Button onClick={onClick}
                         variant={"outline"}
-                        className="fit-content p-1 bg-[rgba(246,255,253,0.9)]">
+                        className="fit-content p-1 bg-white hover:bg-gray-300">
                 <Image src={img}
                        alt={alt}
                        width={width}

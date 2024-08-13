@@ -1,5 +1,6 @@
 import {Inter} from "next/font/google";
 import "./globals.css";
+import {Toaster} from "@/components/ui/toaster";
 
 const inter = Inter({subsets: ["latin"]});
 
@@ -15,8 +16,9 @@ export default function RootLayout({children}) {
             <title>Portfolio</title>
         </head>
 
-        <body className={inter.className}>
+        <body className={inter.className+ '  overflow-x-hidden'}>
         {children}
+        <Toaster />
         <footer className="w-full h-[70px] flex justify-center items-center flex-col">
             <span>
             Made with ❤️ by&nbsp;<a href="https://github.com/FernandesWilliam" className="text-primary"

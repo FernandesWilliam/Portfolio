@@ -19,13 +19,15 @@ export function NavBar() {
             <p>W</p><p className="text-secondary">ill</p>
         </h1>
         <div>
-            <div className={"relative overflow-hidden"}>
-                <ContactDialog text={'Get in Touch'}
-                               variant={'outline'}
-                               buttonClassName={"min-w-[80px]  md:min-w-[140px]  min-h-[46px] z-30"}/>
-                <BorderBeam size={150} duration={12} delay={9}
-                            className={"min-w-[80px]  md:min-w-[140px] hover:cursor-pointer min-h-[46px] rounded-md border"}>
-                </BorderBeam>
+            <div className={"flex items-center justify-evenly"}>
+                <div className={"relative overflow-hidden"}>
+                    <ContactDialog text={'Get in Touch'}
+                                   variant={'outline'}
+                                   buttonClassName={"min-w-[80px]  md:min-w-[140px]  min-h-[46px] z-30"}/>
+                    <BorderBeam size={150} duration={12} delay={9}
+                                className={"min-w-[80px]  md:min-w-[140px] hover:cursor-pointer min-h-[46px] rounded-md border z-[-1]"}>
+                    </BorderBeam>
+                </div>
             </div>
         </div>
     </nav>;

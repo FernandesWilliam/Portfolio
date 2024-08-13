@@ -9,16 +9,18 @@ import ShineBorder from "@/components/magicui/shine-border";
 import {GlossPolygon} from "@/components/gloss-polygon";
 import {AboutMe, ProfileImage} from "@/config/content";
 import {ContactDialog} from "@/components/contact-dialog";
-
+import Osciallate from "@/public/oooscillate.svg";
+import {Portfolio} from "@/components/portfolio";
 export default function Home() {
     return (
-        <main className={"w-full h-full"}>
+        <main className={"w-full h-full overflow-hidden"}>
+            <Image  className={"absolute opacity-10 w-[2000px]"} src={Osciallate}/>
             <GlossPolygon className={"absolute opacity-40 w-[100vw]"}/>
             <div
                 className="z-20 relative gap-10 flex w-full h-full min-h-screen flex-col items-center justify-between py-7 md:px-[50px] max-md:px-[20px]">
                 <NavBar></NavBar>
                 <About></About>
-                <div className="grid md:grid-cols-[4fr_2fr]">
+                <div className="grid md:grid-cols-[4fr_2fr] mt-[30px]">
                     <div className="p-10 justify-center gap-2 flex flex-col">
                         <h1 className="text-4xl font-bold">About Me</h1>
                         <div className="w-full flex justify-center items-center">
@@ -26,18 +28,18 @@ export default function Home() {
                         </div>
                     </div>
                     <div className="flex justify-center items-center">
-                        <ShineBorder
-                            className=" h-fit w-[130px]  rounded-md p-[2px] shadow-[5px_5px_rgba(0,_98,_90,_0.4),_10px_10px_rgba(0,_98,_90,_0.3),_15px_15px_rgba(0,_98,_90,_0.2),_20px_20px_rgba(0,_98,_90,_0.1),_25px_25px_rgba(0,_98,_90,_0.05)]"
-                            color={["#4ecb4c", "#ffae2c", "#f9ff0a"]}>
-                            <Image className=" rounded-md" src={ProfileImage} alt={"Image de Profile"}/>
-                        </ShineBorder>
+                        {/*<Image className=" rounded-md w-[160px]" src={ProfileImage} alt={"Image de Profile"}/>*/}
+                        {/*<ShineBorder*/}
+                        {/*    className=" h-fit w-[130px]  rounded-md p-[2px] shadow-[5px_5px_rgba(0,_98,_90,_0.4),_10px_10px_rgba(0,_98,_90,_0.3),_15px_15px_rgba(0,_98,_90,_0.2),_20px_20px_rgba(0,_98,_90,_0.1),_25px_25px_rgba(0,_98,_90,_0.05)]"*/}
+                        {/*    color={["#4ecb4c", "#ffae2c", "#f9ff0a"]}>*/}
+                        {/*    <Image className=" rounded-md" src={ProfileImage} alt={"Image de Profile"}/>*/}
+                        {/*</ShineBorder>*/}
 
                     </div>
                 </div>
                 <Skill></Skill>
-                <Work></Work>
+                <Portfolio></Portfolio>
                 <ContactDialog text={'Get in Touch'}/>
-
             </div>
 
 

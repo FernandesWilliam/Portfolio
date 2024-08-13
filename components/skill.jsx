@@ -5,13 +5,13 @@ import {AgileSoftwareUsed, StacksUsed} from "@/config/content";
 export function Skill() {
 
     const langs = [
-        <div className="gap-2 flex flex-col justify-center items-center">
+        <div  key={'fr'} className="gap-2 flex flex-col justify-center items-center">
             <div className="radial-progress text-[11px]" style={{"--value": 100, "--size": "50px"}}
                  role="progressbar">100%
             </div>
             French
         </div>,
-        <div className="gap-2 flex flex-col justify-center items-center">
+        <div key={'en'} className="gap-2 flex flex-col justify-center items-center">
             <div className="radial-progress  text-[11px]" style={{"--value": 80, "--size": "50px"}}
                  role="progressbar">80%
             </div>
