@@ -36,8 +36,7 @@
     "tailwindcss": "^3.4.3",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.23.8",
-    "node-loader": "^2.0.0",
-    "zlib-sync": "^0.1.9"
+    "node-loader": "^2.0.0"
   },
   "devDependencies": {
 
