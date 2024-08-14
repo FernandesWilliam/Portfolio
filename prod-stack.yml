@@ -1,7 +1,7 @@
 services:
   ui:
     image: ui:{{short_sha}}
-    command: sh -c "npx serve out"
+    command: sh -c "npm run serve"
     networks:
       - traefik-net
     deploy:
