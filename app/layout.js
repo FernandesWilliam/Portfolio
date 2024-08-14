@@ -13,7 +13,7 @@ export default function RootLayout({children}) {
     return (
         <html lang="en" style={{colorScheme: 'dark'}} className="h-full dark">
         <head>
-            <title>Portfolio</title>
+            <title>Willz</title>
         </head>
 
         <body className={inter.className+ '  overflow-x-hidden'}>
@@ -24,7 +24,7 @@ export default function RootLayout({children}) {
             Made with ❤️ by&nbsp;<a href="https://github.com/FernandesWilliam" className="text-primary"
                                     target="_blank">Will</a>
                 </span>
-            <span className={'text-[10px] text-gray-300'}>Updated 1 June of 2024</span>
+            <span className={'text-[10px] text-gray-300'}>Updated 15 August of 2024</span>
         </footer>
         </body>
 

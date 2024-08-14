@@ -24,6 +24,8 @@ import TrelloImage from "@/public/icons/agile-software/trello.png";
 import GithubImage from "@/public/icons/agile-software/github.png";
 import TradingBotImage from "@/public/trading-bot.webp";
 
+import Stripes from "@/public/stripes.png";
+
 import Gcp from "@/public/gcp.png";
 import Aws from "@/public/aws.png";
 import MongoDb from "@/public/mongodb.png";
@@ -75,6 +77,7 @@ export const AgileSoftwareUsed = [
     ['Github', GithubImage],
     ['GCP', Gcp],
     ['AWS', Aws],
+    ['Stripes',Stripes]
 ];
 
 

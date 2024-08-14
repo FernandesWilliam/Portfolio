@@ -4,7 +4,7 @@ import {GithubIconSvg} from "@/components/svg/github.icon.svg";
 import {CCoilImage, GithubLink, LinkedInLink, LookingFor, ProfileImage2, SequenceDescription} from "@/config/content";
 import {ContactDialog} from "@/components/contact-dialog";
 import LinkedinImage from "@/public/network/linkedin.png";
-import MailImage from "@/public/network/mail.png";
+import BlurFade from "@/components/magicui/blur-fade";
 
 
 export function About() {
@@ -39,9 +39,11 @@ export function About() {
             </div>
         </div>
         <div className={"flex justify-center"}>
-            <Image
-                className="md:w-[250px] max-md:w-[210px]  h-fit rounded-md shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)]"
-                src={ProfileImage2} alt={"Image de Profile"}/>
+            <BlurFade>
+                <Image
+                    className="md:w-[250px] max-md:w-[210px]  h-fit rounded-md shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)]"
+                    src={ProfileImage2} alt={"Profile Image"}/>
+            </BlurFade>
         </div>
     </div>;
 

@@ -8,7 +8,6 @@ import {
 } from "@/components/ui/dialog";
 import {Button} from "@/components/ui/button";
 import {useRef, useState} from "react";
-import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 import {Input} from "@/components/ui/input";
 import {Separator} from "@/components/ui/separator";
 import {Textarea} from "@/components/ui/textarea";
@@ -21,7 +20,7 @@ function validateEmail(email) {
 }
 
 
-export function ContactDialog({text, buttonClassName, variant}) {
+export function ContactDialog({text, buttonClassName, variant, openFromExternal}) {
     const [open, setOpen] = useState(false);
     const mailRef = useRef();
     const subjectRef = useRef();
@@ -40,7 +39,8 @@ export function ContactDialog({text, buttonClassName, variant}) {
         setOpen(open);
     }}>
         <DialogTrigger asChild>
-            <Button onClick={openDialog} className={buttonClassName} variant={variant}>{text}</Button>
+            <Button onClick={openDialog} className={buttonClassName} variant={variant}>
+                <span className={"z-10"}>{text}</span></Button>
         </DialogTrigger>
         <DialogContent
             onBackdropClick={() => {
