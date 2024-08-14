@@ -14,7 +14,6 @@ export default function RootLayout({children}) {
         <html lang="en" style={{colorScheme: 'dark'}} className="h-full dark">
         <head>
             <title>Willz</title>
-            <link rel="icon" type="image/x-icon" href="favicon.ico"/>
         </head>
 
         <body className={inter.className + '  overflow-x-hidden'}>
