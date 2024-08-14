@@ -1,6 +1,5 @@
 import {NextResponse} from 'next/server';
 import {z} from 'zod';
-import {EmbedBuilder, WebhookClient} from "discord.js";
 
 const schema = z.object({
     subject: z.string(),
@@ -17,16 +16,16 @@ export async function POST(request) {
     }
 
     const webhookUrl = "https://discord.com/api/webhooks/1273035570351706213/0qRAF76JSaqZJShxa6eXDDDCuwccNsv5mTIJC6rj_mXYD00ENR7Yd4XZHaWC7VWzd1u7"; // Store your webhook URL in an environment variable
-    const webhookClient = new WebhookClient({url: webhookUrl});
 
     try {
-        const embed = new EmbedBuilder()
-            .setTitle('New Profile Message')
-            .setColor(0x00FFFF)
-            .setDescription(`**Email:** ${mail}\n**Subject:** ${subject}\n**Message:** ${message}`);
-
-        webhookClient.send({
-            embeds: [embed],
+        await fetch(webhookUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                content: `**Email:** ${mail}\n**Subject:** ${subject}\n**Message:** ${message}`
+            })
         });
         return NextResponse.json({success: true, message: 'Message sent to Discord'});
     } catch (error) {
