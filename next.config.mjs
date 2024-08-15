@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    output: "standalone",
     images: {
         unoptimized: true,
     },
@@ -7,9 +8,9 @@ const nextConfig = {
         config.module.rules.push({
             test: /\.node/,
             use: 'node-loader'
-        })
+        });
 
-        return config
+        return config;
     },
 };
 

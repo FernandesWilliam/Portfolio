@@ -19,13 +19,14 @@ RUN npm run build
 
 # ------------------------------------------- STAGING ------------------------------------------- #
 FROM base as staging
-COPY --from=build /client/.next /client/.next
+COPY --from=build /client/out /client/out
 COPY --from=build /client/package.json /client/package.json
 WORKDIR /client/
 
 # ------------------------------------------- PROD ------------------------------------------- #
 FROM base as prod
-COPY --from=build /client/.next /client/.next
-COPY --from=build /client/package.json /client/package.json
-RUN npm i -g next
+COPY --from=build /client/.next/standalone /client/
+COPY --from=build /client/.next/static /client/.next/static
+COPY --from=build /client/public /client/public
 WORKDIR /client/
+

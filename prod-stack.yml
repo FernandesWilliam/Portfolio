@@ -1,7 +1,7 @@
 services:
   ui:
     image: ui:{{short_sha}}
-    command: sh -c "npm run serve"
+    command: sh -c "node server.js"
     networks:
       - traefik-net
     deploy:
