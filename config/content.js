@@ -1,4 +1,4 @@
-import ProfileImage from "@/public/profile.png";
+
 import ProfileImage2 from "@/public/profile2.png";
 import JavaImage from "@/public/icons/stacks/java.png";
 import NodeJsImage from "@/public/icons/stacks/node-js.png";
@@ -82,7 +82,6 @@ export const AgileSoftwareUsed = [
 
 
 export {
-    ProfileImage,
     JavaImage,
     NodeJsImage,
     NextJsImage,

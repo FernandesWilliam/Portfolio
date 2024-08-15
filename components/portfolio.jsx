@@ -12,7 +12,7 @@ import Image from "next/image";
 import React from "react";
 import ResellSpotterLanding from "@/public/resell-spotter-ld.png";
 import TiktoolsLanding from "@/public/tiktools.gif";
-import Sook from "@/public/sook.png";
+import Kopeur from "@/public/kopeur.png";
 import TradingBotLd from "@/public/tradingbotchart.png";
 import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
 import {motion} from "framer-motion";
@@ -158,7 +158,7 @@ export function Portfolio() {
             name: "Kopeur",
             description: "Co-founder of Kopeur, a platform to buy Vinted items first",
             logo: KopeurImage,
-            backgroundImage: Sook,
+            backgroundImage: Kopeur,
             exited: true,
             linkTo: "https://souk.to/en",
             date: "From November 2022 to May 2023",

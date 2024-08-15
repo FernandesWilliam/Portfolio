@@ -39,11 +39,9 @@ export function About() {
             </div>
         </div>
         <div className={"flex justify-center"}>
-            <BlurFade>
-                <Image
-                    className="md:w-[250px] max-md:w-[210px]  h-fit rounded-md shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)]"
-                    src={ProfileImage2} alt={"Profile Image"}/>
-            </BlurFade>
+            <Image
+                className="md:w-[250px] max-md:w-[210px]  h-fit rounded-md shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)]"
+                src={ProfileImage2} alt={"Profile Image"}/>
         </div>
     </div>;
 

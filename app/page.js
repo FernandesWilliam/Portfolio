@@ -25,9 +25,8 @@ export default function Home() {
                     <div className="p-10 justify-center gap-2 flex flex-col">
                         <h1 className="text-4xl font-bold">About Me</h1>
                         <div className="w-full flex justify-center items-center">
-                            <BlurFade>
+
                                 <span className="text-md  italic text-justify">{AboutMe}</span>
-                            </BlurFade>
                         </div>
                     </div>
                     <div className="flex justify-center items-center">
